@@ -11,32 +11,105 @@
     	<link rel="canonical" href="http://stickmanventures.com/labs/demo/onscreen-keyboard-html5-canvas-multitouch/">
     
 		<style type="text/css">
-			body { margin: 0px; overflow: hidden; }
-			#container {left: 50px; position: absolute; width: 960px;}
+			body { margin: 0px; }
+			#outer {position: relative; margin: auto; max-width: 1050px; margin-top:80px;}
+			#container {position: absolute; height: 500px;}
 			#testArea {width: 100%; height: 150px; font-size: 2em; line-height: 1.5em;}
+			canvas {
+			  top: 30px;
+			  position: absolute;
+			}
+
+	    #sv-lab-header {
+	      position: absolute;
+	      top: 0;
+	      width: 100%;
+	      height: 65px;
+	      background-color: #96CA33;
+	    }
+	    #sv-lab-header div {
+	      min-width: 300px;
+	      text-align: center;
+	    }
+
+	    #sv-logo {
+	      width: 100px;
+	      height: 62px;
+	      background: url(sv-white.svg) no-repeat center center;
+	      background-size: contain;
+	      display: block;
+	      margin: auto;
+	    }
+
+		  .flex-container {
+	       display: -webkit-flex;
+	       display: flex;
+	       -webkit-flex-direction: row /* works with row or column */
+	       flex-direction: row;
+	       -webkit-align-items: center;
+	       align-items: center;
+	       -webkit-justify-content: center;
+	       justify-content: center;
+	    }
+
+	    button, .button {
+	      padding: 10px;
+	      margin: 0 16px;
+	      outline: none;
+	      border: 1px solid rgb(90, 90, 90);
+	      background: #fff;
+	      color: #000;
+	      min-width: 150px;
+	      text-decoration: none;
+	      border-radius: 3px;
+	    }
+
+	    .buttoncolor-ON {
+	      background: #6E9429;
+	    }
+
+	    .buttoncolor-OFF {
+	      background: #AA0000;
+	    }
+
+	    button:active, .button:active {
+	      background: rgb(90, 90, 90);
+	    }
+
+	    button:active:hover, .button:active:hover {
+	      background: rgb(80, 80, 80);
+	    }
 		</style>
 </head>
 
 <body>
-	<div id="container">
-		<h1>OnScreen keyboard via HTML5 canvas, <a href="http://dvcs.w3.org/hg/webevents/raw-file/tip/touchevents.html">touch events API</a>, and <a href="https://github.com/borismus/MagicTouch">Magictouch.js</a> <div class="g-plusone"></div></h1>
-		<p>The following keyboard is implemented in HTML5 canvas and listens for touch events (will not work with your mouse, no mouseevent tracking implemented). We're using it with <a href="http://multi-touch-screen.com/">PQ Labs</a> overlays. Xoom / iPad kinda work, but we didn't optimize performance for those devices.</p>
-		
-		<p>To make Chrome or Firefox on the desktop listen to touch events, you have install the <a href="https://github.com/fajran/npTuioClient">npTuioClient NPAPI plugin</a> and 
-		have an overlay that supports <a href="http://www.tuio.org/">TUIO</a>. Don't have an overlay? Boris Smus wrote a sweet article on the topic you should read: <a href="http://smus.com/multi-touch-browser-patch">Multi-Touch for your Desktop Browser</a>. We're 
-		using his <a href="https://github.com/borismus/MagicTouch">Magictouch.js</a> multi-touch polyfill with great success with our overlays.</p>
-		
-		<p>More info: <a href="http://blog.stickmanventures.com/2011/10/22/onscreen-keyboard-implemented-in-html5-canvas-with-multitouch-support-via-touch-events-api-and-magictouch-js/">blog post</a>, <a href="http://www.youtube.com/watch?v=tAUSOve8IAc">video of screen in action</a></p>
-		
-		<form>
-			<textarea id="testArea" autofocus></textarea>
-		</form>
-	</div>
-	
-	<canvas id="canvas" width="960" height="360"></canvas>	
-	
-	<object id="tuio" type="application/x-tuio">You don't seem to have any multitouch support on the desktop. You need some TUIO yo: <a href="https://github.com/fajran/npTuioClient">npTuioClient NPAPI plugin</a> </object>
+  <div id="sv-lab-header" class="flex-container">
+    <div>
+      <a href="https://www.stickmanventures.com/" id="sv-logo" title="Stickman Ventures"></a>
+    </div>
+    <div></div>
+    <div><a href="https://www.stickmanventures.com/2011/10/22/onscreen-keyboard-implemented-in-html5-canvas-with-multitouch-support-via-touch-events-api-and-magictouch-js/" class="button" title="Learn how we built this">Learn More &raquo;</a></div>
+  </div>
+  <div id="outer">
+  	<div id="container">
+  		<h1>OnScreen keyboard via HTML5 canvas, <a href="http://dvcs.w3.org/hg/webevents/raw-file/tip/touchevents.html">touch events API</a>, and <a href="https://github.com/borismus/MagicTouch">Magictouch.js</a></h1>
+  		<p>The following keyboard is implemented in HTML5 canvas and listens for touch events (will not work with your mouse, no mouseevent tracking implemented). We're using it with <a href="http://multi-touch-screen.com/">PQ Labs</a> overlays. Xoom / iPad kinda work, but we didn't optimize performance for those devices.</p>
+  		
+  		<p>To make Chrome or Firefox on the desktop listen to touch events, you have install the <a href="https://github.com/fajran/npTuioClient">npTuioClient NPAPI plugin</a> and 
+  		have an overlay that supports <a href="http://www.tuio.org/">TUIO</a>. Don't have an overlay? Boris Smus wrote a sweet article on the topic you should read: <a href="http://smus.com/multi-touch-browser-patch">Multi-Touch for your Desktop Browser</a>. We're 
+  		using his <a href="https://github.com/borismus/MagicTouch">Magictouch.js</a> multi-touch polyfill with great success with our overlays.</p>
+  		
+  		<p>More info: <a href="http://www.youtube.com/watch?v=tAUSOve8IAc">video of screen in action</a></p>
 
+  		<object id="tuio" type="application/x-tuio"><p>You don't seem to have any multitouch support on the desktop. You need some TUIO yo: <a href="https://github.com/fajran/npTuioClient">npTuioClient NPAPI plugin</a></p></object>
+  		
+  		<form>
+  			<textarea id="testArea" autofocus></textarea>
+  		</form>
+  	</div>
+  	<canvas id="canvas" width="960" height="360"></canvas>
+  </div>
+	
 	<script type="text/javascript" src="magictouch.js"></script>
 	<script type="text/javascript">
 	
@@ -341,8 +414,8 @@
 			var nh = window.innerHeight;
 		
 			if ((w != nw) || (h != nh)) {
-				w = nw;
-				h = nh;
+				w = 1100;
+				h = 1100;
 				canvas.style.width = w+'px';
 				canvas.style.height = h+'px';
 				canvas.width = w;
@@ -583,12 +656,6 @@
     g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     s.parentNode.insertBefore(g, s);
    })(document, 'script');
-   
-   (function() {
-    	var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    	po.src = 'https://apis.google.com/js/plusone.js';
-    	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  	})();
 	
 	</script>
 
